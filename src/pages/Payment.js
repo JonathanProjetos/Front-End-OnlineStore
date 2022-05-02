@@ -17,12 +17,17 @@ class Payment extends Component {
       estado: '',
       check: '',
       btnPayment: true,
+      cart: [],
+      total: 0,
     };
 
     this.handleChangeClient = this.handleChangeClient.bind(this);
+    this.manipularCart = this.manipularCart.bind(this);
+    this.fetchCart = this.fetchCart.bind(this);
   }
 
   componentDidMount() {
+    this.fetchCart();
     this.ValidateFromPayment();
   }
 
@@ -60,12 +65,40 @@ class Payment extends Component {
       cep.length > 0,
       endereco.length > 0,
     ];
-    console.log(booleanValidade);
     const resultValidate = booleanValidade.every((el) => el === true);
-    console.log(!resultValidate);
     this.setState({
       btnPayment: !resultValidate,
     });
+  }
+
+  manipularCart(array) {
+    const resultado = array.reduce((acc, crr) => {
+      if (acc[`produto${crr.id}`] === undefined) {
+        acc[`produto${crr.id}`] = {
+          descricao: crr,
+          quantidade: 1,
+        };
+      } else {
+        acc[`produto${crr.id}`] = {
+          descricao: crr,
+          quantidade: acc[`produto${crr.id}`].quantidade + 1,
+        };
+      }
+      return acc;
+    }, {});
+    const cart = Object.values(resultado);
+    cart.map((el) => this.setState((prev) => ({
+      cart: [...prev.cart, el.descricao],
+      [el.descricao.id]: el.quantidade,
+      total: prev.total + el.descricao.price * el.quantidade,
+    })));
+  }
+
+  fetchCart() {
+    const cartItens = JSON.parse(localStorage.getItem('cart'));
+    if (cartItens !== null) {
+      this.manipularCart(cartItens);
+    }
   }
 
   render() {
@@ -82,10 +115,28 @@ class Payment extends Component {
       nome,
       numero,
       telefone,
+      cart,
+      total,
     } = this.state;
+
+    const { state } = this;
 
     return (
       <section>
+        <h3>Revise seus Produtos</h3>
+        <div>
+          { cart.map((value) => (
+            <div key={ value.id } className="listacarrinho">
+              <p data-testid="shopping-cart-product-name">{ value.title }</p>
+              <img src={ value.thumbnail } alt={ value.title } />
+              <p>{ `Quantidade: ${state[`${value.id}`]}` }</p>
+              <p>{ `R$: ${value.price * state[`${value.id}`]}` }</p>
+            </div>
+          ))}
+        </div>
+        <div>
+          { `Total da Compra: R$ ${total}` }
+        </div>
         <FormPayment
           btnPayment={ btnPayment }
           cep={ cep }

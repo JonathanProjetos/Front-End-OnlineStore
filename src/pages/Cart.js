@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Cart.css';
 
 class Cart extends React.Component {
@@ -87,7 +88,7 @@ class Cart extends React.Component {
   }
 
   render() {
-    const { cart, btnLock, total } = this.state;
+    const { cart, total } = this.state;
     const { state } = this;
 
     return (
@@ -114,7 +115,6 @@ class Cart extends React.Component {
                   <button
                     type="button"
                     data-testid="product-decrease-quantity"
-                    disabled={ btnLock }
                     name={ value.id }
                     value={ value.price }
                     onClick={ this.decrementar }
@@ -136,7 +136,15 @@ class Cart extends React.Component {
         </div>
         <div className="finalizar">
           <h1>{ `Total: R$${total}` }</h1>
-          <button type="button">Finalizar</button>
+          <Link to="/cart/payment">
+            <button
+              type="button"
+              disabled={ cart.length === 0 }
+              data-testid="checkout-products"
+            >
+              Finalizar
+            </button>
+          </Link>
         </div>
       </div>
     );

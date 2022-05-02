@@ -6,7 +6,6 @@ class FormPayment extends Component {
   render() {
     const {
       btnPayment,
-      check,
       cep,
       cidade,
       complemento,
@@ -160,6 +159,7 @@ class FormPayment extends Component {
               value="boleto"
               type="radio"
               name="check"
+              onChange={ handleChangeClient }
             />
           </label>
 
@@ -170,6 +170,7 @@ class FormPayment extends Component {
               value="visa"
               type="radio"
               name="check"
+              onChange={ handleChangeClient }
             />
           </label>
 
@@ -180,6 +181,7 @@ class FormPayment extends Component {
               value="masterCard"
               type="radio"
               name="check"
+              onChange={ handleChangeClient }
             />
           </label>
 
@@ -190,6 +192,7 @@ class FormPayment extends Component {
               value="elo"
               type="radio"
               name="check"
+              onChange={ handleChangeClient }
             />
           </label>
 

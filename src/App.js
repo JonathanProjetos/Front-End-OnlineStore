@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import DetailsProduct from './pages/DetailsProduct';
 import { getCategories, getProductsFromCategoryAndQuery,
   getCategoriesList } from './services/api';
-import Payment from './pages/checkout';
+import Payment from './pages/Payment';
 
 class App extends React.Component {
   constructor() {
@@ -80,7 +80,7 @@ class App extends React.Component {
 
   render() {
     const { categorias, btnIsLocked, search, produtos,
-      didSearch, searchCat, didCategorie } = this.state;
+      didSearch, searchCat, didCategorie, cartList } = this.state;
     return (
       <main>
         <BrowserRouter>
@@ -109,13 +109,20 @@ class App extends React.Component {
             />
             <Route
               exact
+              path="/cart/payment"
+              render={ (props) => (<Payment
+                { ...props }
+                cartList={ cartList }
+              />) }
+            />
+            <Route
+              exact
               path="/:id"
               render={ (props) => (<DetailsProduct
                 { ...props }
                 addCartList={ this.addCartList }
               />) }
             />
-            <Route exact path="/cart/payment" component={ Payment } />
           </Switch>
         </BrowserRouter>
       </main>

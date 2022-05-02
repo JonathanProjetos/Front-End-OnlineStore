@@ -52,6 +52,12 @@ class DetailsProduct extends Component {
                 {' '}
                 { value.price }
               </p>
+              <div>
+                {
+                  value.shipping.free_shipping
+                  && <p data-testid="free-shipping">Frete Grátis!</p>
+                }
+              </div>
               <img src={ value.thumbnail } alt={ value.title } />
               <h3>Especifichções Técnicas</h3>
               <ul>

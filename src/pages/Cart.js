@@ -50,17 +50,6 @@ class Cart extends React.Component {
     }
   }
 
-  // btnHandler({ target }) {
-  //   const { value } = target;
-  //   const { state } = this;
-  //   const estado = state[`${value}`];
-  //   if (estado > 1) {
-  //     this.setState({ btnLock: false });
-  //   } else {
-  //     this.setState({ btnLock: true });
-  //   }
-  // }
-
   incrementar({ target }) {
     const { name, value } = target;
     this.setState((prev) => ({

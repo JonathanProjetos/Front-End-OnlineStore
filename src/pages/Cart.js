@@ -53,10 +53,20 @@ class Cart extends React.Component {
 
   incrementar({ target }) {
     const { name, value } = target;
+    const { cart } = this.state;
     this.setState((prev) => ({
       [name]: prev[name] + 1,
       total: prev.total + Number(value),
-    }));
+    }), () => {
+      const { state } = this;
+      const availableItem = cart.find((el) => el.id === name).available_quantity;
+      if (state[`${name}`] > availableItem) {
+        this.setState((prev) => ({
+          [name]: prev[name] - 1,
+          total: prev.total - Number(value),
+        }));
+      }
+    });
   }
 
   decrementar({ target }) {

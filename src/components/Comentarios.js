@@ -60,7 +60,7 @@ class Comentarios extends Component {
       email: '',
       check: '',
       textArea: '',
-    });
+    }, this.getAvaliacao());
   }
 
   getAvaliacao = () => {
@@ -84,6 +84,8 @@ class Comentarios extends Component {
               value={ email }
               name="email"
               id="email"
+              required
+              placeholder="Adicione o seu email"
               data-testid="product-detail-email"
               type="email"
             />
@@ -105,11 +107,12 @@ class Comentarios extends Component {
               1
               <input
                 onChange={ this.handleChange }
-                value={ 1 }
+                value="1"
                 data-testid="1-rating"
                 name="check"
                 id="1"
                 type="radio"
+                required
               />
             </label>
 
@@ -117,11 +120,12 @@ class Comentarios extends Component {
               2
               <input
                 onChange={ this.handleChange }
-                value={ 2 }
+                value="2"
                 data-testid="2-rating"
                 name="check"
                 id="2"
                 type="radio"
+                required
               />
             </label>
 
@@ -129,11 +133,12 @@ class Comentarios extends Component {
               3
               <input
                 onChange={ this.handleChange }
-                value={ 3 }
+                value="3"
                 data-testid="3-rating"
                 name="check"
                 id="3"
                 type="radio"
+                required
               />
             </label>
 
@@ -141,11 +146,12 @@ class Comentarios extends Component {
               4
               <input
                 onChange={ this.handleChange }
-                value={ 4 }
+                value="4"
                 data-testid="4-rating"
                 name="check"
                 id="4"
                 type="radio"
+                required
               />
             </label>
 
@@ -153,11 +159,12 @@ class Comentarios extends Component {
               5
               <input
                 onChange={ this.handleChange }
-                value={ 5 }
+                value="5"
                 data-testid="5-rating"
                 name="check"
                 id="5"
                 type="radio"
+                required
               />
             </label>
 
@@ -165,7 +172,7 @@ class Comentarios extends Component {
           <button
             value={ id }
             data-testid="submit-review-btn"
-            type="submit"
+            type="button"
             disabled={ btnSubimit }
             onClick={ this.saveForm }
           >
@@ -176,9 +183,9 @@ class Comentarios extends Component {
         <div>
           {filterDados.length > 0 ? filterDados.map((elm, index) => (
             <div key={ index }>
-              <p data-testid="product-detail-email">{`Email: ${elm.email}` }</p>
-              <p>{`Nota: ${elm.check}` }</p>
-              <p>{`Comentário: ${elm.textArea}`}</p>
+              <p>{ elm.email }</p>
+              <p>{ elm.check }</p>
+              <p>{ elm.textArea }</p>
             </div>
           )) : <p> </p>}
         </div>

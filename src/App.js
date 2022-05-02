@@ -5,6 +5,7 @@ import Cart from './pages/Cart';
 import DetailsProduct from './pages/DetailsProduct';
 import { getCategories, getProductsFromCategoryAndQuery,
   getCategoriesList } from './services/api';
+import Payment from './pages/checkout';
 
 class App extends React.Component {
   constructor() {
@@ -113,6 +114,7 @@ class App extends React.Component {
                 addCartList={ this.addCartList }
               />) }
             />
+            <Route exact path="/cart/payment" component={ Payment } />
           </Switch>
         </BrowserRouter>
       </main>

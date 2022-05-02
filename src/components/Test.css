@@ -1,0 +1,9 @@
+.test{
+  display: flex;
+  font-size: 20px;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20px;
+  padding: 20px;
+}

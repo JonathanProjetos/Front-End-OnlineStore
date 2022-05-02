@@ -143,7 +143,12 @@ class Cart extends React.Component {
             : <h3 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h3>}
         </div>
         <h1>{ `Total: R$${total}` }</h1>
-        <button type="button">Finalizar</button>
+        <button
+          type="button"
+          data-testid="checkout-products"
+        >
+          Finalizar
+        </button>
       </div>
     );
   }

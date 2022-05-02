@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import Home from './pages/Home';
 import Cart from './pages/Cart';
+import Home from './pages/Home';
 import DetailsProduct from './pages/DetailsProduct';
 import { getCategories, getProductsFromCategoryAndQuery,
   getCategoriesList } from './services/api';
@@ -49,7 +49,7 @@ class App extends React.Component {
 
   async clickCatSearch({ target }) {
     const { id } = target;
-    this.setState({ searchCat: [], didCategorie: 'Carregando...' });
+    this.setState({ searchCat: [], didCategorie: 'Carregando...', produtos: [] });
     const result = await getCategoriesList(id);
     this.setState({ searchCat: result.results, didCategorie: '' });
   }
@@ -67,6 +67,7 @@ class App extends React.Component {
     const { search } = this.state;
     const result = await getProductsFromCategoryAndQuery(undefined, search);
     this.setState({
+      searchCat: [],
       produtos: result.results,
       didSearch: 'Nenhum produto foi encontrado',
     });

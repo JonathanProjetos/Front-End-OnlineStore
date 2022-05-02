@@ -60,7 +60,7 @@ class Comentarios extends Component {
       email: '',
       check: '',
       textArea: '',
-    }, this.getAvaliacao());
+    }, () => this.getAvaliacao());
   }
 
   getAvaliacao = () => {
@@ -77,19 +77,15 @@ class Comentarios extends Component {
     return (
       <section>
         <form>
-          <label htmlFor="email">
-            Email:
-            <input
-              onChange={ this.handleChange }
-              value={ email }
-              name="email"
-              id="email"
-              required
-              placeholder="Adicione o seu email"
-              data-testid="product-detail-email"
-              type="email"
-            />
-          </label>
+          <input
+            onChange={ this.handleChange }
+            value={ email }
+            name="email"
+            id="email"
+            placeholder="Email"
+            data-testid="product-detail-email"
+            type="email"
+          />
 
           <label htmlFor="comentario">
             Comentários:

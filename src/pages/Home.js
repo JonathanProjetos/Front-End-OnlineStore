@@ -10,7 +10,7 @@ class Home extends React.Component {
       search, produtos,
       didSearch, clickCatSearch,
       searchCat, didCategorie,
-      addCartList } = this.props;
+      addCartList, cartItens } = this.props;
     return (
       <div className="fundo">
         <div className="header">
@@ -33,16 +33,14 @@ class Home extends React.Component {
             </button>
           </div>
           <div className="carrinho">
-            <nav>
-              <Link
-                to="/cart"
-                data-testid="shopping-cart-button"
-                className="carrinho"
-              >
-                🛒
-
-              </Link>
-            </nav>
+            <Link
+              to="/cart"
+              data-testid="shopping-cart-button"
+              className="carrinho"
+            >
+              🛒
+              <p data-testid="shopping-cart-size">{ cartItens }</p>
+            </Link>
           </div>
         </div>
         <div className="texto">
@@ -91,7 +89,6 @@ class Home extends React.Component {
                       onClick={ addCartList }
                     >
                       Adicionar ao Carrinho
-
                     </button>
                   </div>
                 ))
@@ -141,6 +138,7 @@ Home.propTypes = {
   didSearch: PropTypes.string.isRequired,
   didCategorie: PropTypes.string.isRequired,
   btnIsLocked: PropTypes.bool.isRequired,
+  cartItens: PropTypes.number.isRequired,
   produtos: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
   searchCat: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.any)).isRequired,
 };

@@ -25,10 +25,12 @@ class App extends React.Component {
     this.btnHandler = this.btnHandler.bind(this);
     this.clickSearch = this.clickSearch.bind(this);
     this.clickCatSearch = this.clickCatSearch.bind(this);
+    this.fethcCart = this.fethcCart.bind(this);
   }
 
   componentDidMount() {
     this.fethcCategorias();
+    this.fethcCart();
   }
 
   handleChange({ target }) {
@@ -42,9 +44,12 @@ class App extends React.Component {
   addCartList = ({ target }) => {
     const { value } = target;
     const list = JSON.parse(value);
-    const { cartList } = this.state;
-    cartList.push(list);
-    localStorage.setItem('cart', JSON.stringify(cartList));
+    this.setState((prev) => ({
+      cartList: [...prev.cartList, list],
+    }), () => {
+      const { cartList } = this.state;
+      localStorage.setItem('cart', JSON.stringify(cartList));
+    });
   }
 
   async clickCatSearch({ target }) {
@@ -78,6 +83,11 @@ class App extends React.Component {
     this.setState({ categorias: resultado });
   }
 
+  fethcCart() {
+    const resultado = localStorage.getItem('cart');
+    this.setState({ cartList: resultado === null ? [] : JSON.parse(resultado) });
+  }
+
   render() {
     const { categorias, btnIsLocked, search, produtos,
       didSearch, searchCat, didCategorie, cartList } = this.state;
@@ -100,6 +110,7 @@ class App extends React.Component {
                 onChange={ this.handleChange }
                 onClick={ this.clickSearch }
                 clickCatSearch={ this.clickCatSearch }
+                cartItens={ cartList.length }
               />) }
             />
             <Route
@@ -121,6 +132,7 @@ class App extends React.Component {
               render={ (props) => (<DetailsProduct
                 { ...props }
                 addCartList={ this.addCartList }
+                cartItens={ cartList.length }
               />) }
             />
           </Switch>

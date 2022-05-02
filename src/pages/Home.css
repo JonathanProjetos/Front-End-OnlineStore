@@ -44,12 +44,16 @@
 
 .carrinho {
   color: white;
+  display: flex;
   font-size: 30px;
   margin-left: 20%;
-  margin-top: 20px;
+  margin-top: 10px;
   width: 100px;
 }
 
+.carrinho p {
+  margin: 0;
+}
 
 .lista {
   display: block;

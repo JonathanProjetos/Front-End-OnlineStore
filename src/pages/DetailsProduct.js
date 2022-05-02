@@ -26,12 +26,21 @@ class DetailsProduct extends Component {
 
   render() {
     const { match: { params: { id } } } = this.props;
-    const { addCartList } = this.props;
+    const { addCartList, cartItens } = this.props;
     const { details } = this.state;
     return (
       <div>
         <nav>
-          <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+          <div className="carrinho">
+            <Link
+              to="/cart"
+              data-testid="shopping-cart-button"
+              className="carrinho"
+            >
+              🛒
+              <p data-testid="shopping-cart-size">{ cartItens }</p>
+            </Link>
+          </div>
         </nav>
         <div>
           {details.map((value) => (
@@ -80,6 +89,7 @@ DetailsProduct.propTypes = {
     }),
   }).isRequired,
   addCartList: PropTypes.func.isRequired,
+  cartItens: PropTypes.number.isRequired,
 };
 
 export default DetailsProduct;
